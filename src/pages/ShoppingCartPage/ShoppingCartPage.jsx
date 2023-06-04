@@ -23,7 +23,11 @@ const ShoppingCartPage = () => {
 
   return (
     <div className={styles.content}>
-      <OrderForm onSubmit={submitForm} listOfOrders={goods} />
+      <OrderForm
+        onSubmit={submitForm}
+        listOfOrders={goods}
+        total={totalPrice}
+      />
       <OrderList listOfOrders={goods} />
     </div>
   );
