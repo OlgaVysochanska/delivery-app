@@ -14,6 +14,7 @@ const ShopList = () => {
 
   useEffect(() => {
     dispatch(fetchShops());
+    dispatch(fetchGoods('FastGood'));
   }, [dispatch]);
 
   const shops = useSelector(selectShops);
@@ -39,7 +40,7 @@ const ShopList = () => {
       {shops.length === 0 && <Loader />}
       {shopBtns}
       {goods.length === 0 && shops.length !== 0 && (
-        <p>Choose a shop, please!</p>
+        <p>Select a store, please!</p>
       )}
     </ul>
   );

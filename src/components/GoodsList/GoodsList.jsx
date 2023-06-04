@@ -10,14 +10,13 @@ const GoodsList = () => {
   const [selectedFood, setSelectedFood] = useState([]);
   const goods = useSelector(selectGoods);
   const dispatch = useDispatch();
-
+  const localFood = localStorage.getItem('orders');
   useEffect(() => {
-    const localFood = localStorage.getItem('goods');
     if (localFood !== null && localFood.length !== 0) {
-      const selected = JSON.parse(localStorage.getItem('goods'));
+      const selected = JSON.parse(localStorage.getItem('orders'));
       setSelectedFood([...selected.map(item => item._id)]);
     }
-  }, [selectedFood]);
+  }, [localFood]);
 
   const addToCart = data => {
     dispatch(setGoods(data));
@@ -29,24 +28,29 @@ const GoodsList = () => {
     setSelectedFood(selectedFood.filter(item => item._id !== data._id));
   };
 
-  const goodsList = goods.map(item => (
-    <li key={item._id}>
-      <div>
-        <img className={styles.img} src={item.url} alt="Food" width="240" />
-        <p className={styles.goodTitle}>{item.title}</p>
-        <p>Price: {item.price}</p>
-      </div>
-      {selectedFood.includes(item._id) ? (
-        <button className={styles.button} onClick={() => removeFromCart(item)}>
-          Remove from cart
-        </button>
-      ) : (
-        <button className={styles.button} onClick={() => addToCart(item)}>
-          Add to cart
-        </button>
-      )}
-    </li>
-  ));
+  const goodsList = goods.map(item => {
+    return (
+      <li key={item._id}>
+        <div>
+          <img className={styles.img} src={item.url} alt="Food" width="240" />
+          <p className={styles.goodTitle}>{item.title}</p>
+          <p>Price: {item.price}</p>
+        </div>
+        {selectedFood.includes(item._id) ? (
+          <button
+            className={styles.button}
+            onClick={() => removeFromCart(item)}
+          >
+            Remove from cart
+          </button>
+        ) : (
+          <button className={styles.button} onClick={() => addToCart(item)}>
+            Add to cart
+          </button>
+        )}
+      </li>
+    );
+  });
 
   return <ul className={styles.list}>{goodsList}</ul>;
 };

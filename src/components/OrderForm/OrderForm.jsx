@@ -67,6 +67,9 @@ const OrderForm = ({ onSubmit, listOfOrders, total }) => {
         type="text"
         handleChange={handleChange}
       />
+      <div className={styles.button}>
+        Total: {''} {total}
+      </div>
       <button className={styles.button}>SUBMIT YOUR ORDER</button>
     </form>
   );

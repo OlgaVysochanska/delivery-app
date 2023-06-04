@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { createOrder, fetchOrders } from './ordersOperations';
 
 const initialState = {
@@ -21,13 +21,21 @@ const ordersSlice = createSlice({
     },
     setGoods(state, { payload }) {
       state.orders.goods.push(payload);
-      localStorage.setItem('goods', JSON.stringify(state.orders.goods));
+      localStorage.setItem('orders', JSON.stringify(state.orders.goods));
     },
-    setQuantity(state, { payload }) {
+    setQuantity(state, { payload: { quantity, _id } }) {
+      // const changed = state.orders.goods.find(it => it._id === payload._id);
+      // const changedIdx = state.orders.goods.findIndex(
+      //   it => it._id === payload._id
+      // );
+      // state.orders.goods[changedIdx] = {
+      //   ...changed,
+      //   quantity: payload.quantity,
+      // };
+      console.log(quantity, _id);
+      console.log(current(state.orders.goods));
       state.orders.goods = state.orders.goods.map(item =>
-        item._id === payload._id
-          ? { ...item, quantity: payload.quantity }
-          : item
+        item._id === _id ? { ...item, quantity } : item
       );
     },
     setTotalPrice(state, { payload }) {
@@ -37,7 +45,7 @@ const ordersSlice = createSlice({
       state.orders.goods = state.orders.goods.filter(
         item => item._id !== payload._id
       );
-      localStorage.setItem('goods', JSON.stringify(state.orders.goods));
+      localStorage.setItem('orders', JSON.stringify(state.orders.goods));
     },
   },
   extraReducers: builder => {

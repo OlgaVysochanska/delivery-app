@@ -8,12 +8,11 @@ export default instance;
 
 export const getShops = async () => {
   const { data } = await instance.get('/shops');
-
   return data;
 };
 
 export const getGoods = async (shop = '', page = 1) => {
-  const { data } = await instance.get(`/goods`, {
+  const { data } = await instance.get('/goods', {
     params: {
       shop,
       page,
@@ -23,13 +22,13 @@ export const getGoods = async (shop = '', page = 1) => {
 };
 
 export const addOrder = async orderData => {
-  const { data } = await instance.post(`/orders`, orderData);
+  const { data } = await instance.post('/orders', orderData);
   return data;
 };
 
 export const getOrders = async userData => {
   console.log(userData);
-  const { data } = await instance.get(`/orders`, userData);
+  const { data } = await instance.get('/orders', userData);
   console.log(data);
   return data;
 };

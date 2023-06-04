@@ -9,12 +9,14 @@ import { createOrder } from 'redux/orders/ordersOperations';
 import styles from './ShoppingCartPage.module.css';
 
 const ShoppingCartPage = () => {
-  const { goods } = useSelector(orderedGoods);
+  const goods = JSON.parse(localStorage.getItem('orders'))
+    ? JSON.parse(localStorage.getItem('orders'))
+    : [];
+  const dispatch = useDispatch();
+
   const { totalPrice } = useSelector(orderedGoods);
 
   // const arrayOfId = goods.map(item => item._id);
-
-  const dispatch = useDispatch();
 
   const submitForm = data => {
     dispatch(createOrder(data));
