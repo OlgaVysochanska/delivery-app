@@ -10,27 +10,25 @@ const OrderList = ({ listOfOrders: goods }) => {
   const dispatch = useDispatch();
 
   const handleChange = (e, data) => {
-    dispatch(setQuantity({ quantity: Number(e.target.value), _id: data }));
     setQuan(Number(e.target.value));
+    dispatch(setQuantity({ quantity: quan, _id: data }));
   };
 
   useEffect(() => {
-    if (goods.length !== 0) {
+    if (goods.length !== 0 && quan > 0) {
       dispatch(
         setTotalPrice(
           goods
-            .map(item => {
-              return item.price * item.quantity;
-            })
-            .reduce((acc, prod) => {
-              acc += prod;
-              return acc;
-            })
+            .map(item => item.price * quan)
+            .reduce((acc, item) => {
+              return acc + item;
+            }, 0)
         )
       );
+      return;
     }
     dispatch(setTotalPrice(0));
-  }, [quan]);
+  }, [quan, dispatch, goods]);
 
   const listOfOrders = goods.map(item => (
     <li key={item._id}>
@@ -41,6 +39,7 @@ const OrderList = ({ listOfOrders: goods }) => {
         <label>
           Quantity:{' '}
           <input
+            className={styles.input}
             type="number"
             name="quantity"
             min="1"
