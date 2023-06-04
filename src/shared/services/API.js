@@ -22,34 +22,14 @@ export const getGoods = async (shop = '', page = 1) => {
   return data;
 };
 
-export const addOrder = async (
-  owner,
-  userName,
-  userPhone,
-  userLocation,
-  shop,
-  goods,
-  totalPrice
-) => {
-  const { data } = await instance.post(`/orders`, {
-    params: {
-      owner,
-      userName,
-      userPhone,
-      userLocation,
-      shop,
-      goods,
-      totalPrice,
-    },
-  });
+export const addOrder = async (orderData) => {
+  console.log(orderData, 'service order data');
+  const { data } = await instance.post(`/orders`, orderData);
+  console.log(data, 'service data');
   return data;
 };
 
 export const getOrders = async (email = '') => {
-  const { data } = await instance.get(`/orders`, {
-    params: {
-      email,
-    },
-  });
+  const { data } = await instance.get(`/orders`, email);
   return data;
 };

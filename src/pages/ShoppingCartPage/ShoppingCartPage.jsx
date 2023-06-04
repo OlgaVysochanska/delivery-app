@@ -16,8 +16,7 @@ const ShoppingCartPage = () => {
 
   const dispatch = useDispatch();
 
-  const submitForm = (e, data) => {
-    e.preventDefault();
+  const submitForm = data => {
     dispatch(createOrder(data));
   };
 

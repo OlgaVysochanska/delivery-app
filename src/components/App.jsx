@@ -6,6 +6,7 @@ import Layout from 'components/Layout/Layout';
 
 const ShopPage = lazy(() => import('pages/ShopPage'));
 const ShoppingCartPage = lazy(() => import('pages/ShoppingCartPage'));
+const HistoryPage = lazy(() => import('pages/HistoryPage'));
 const NotFoundPage = lazy(() => import('pages/NotFoundPage'));
 
 export const App = () => {
@@ -16,6 +17,7 @@ export const App = () => {
           <Route path="" element={<Navigate to="/shop" replace />} />
           <Route path="/shop" element={<ShopPage />} />
           <Route path="/cart" element={<ShoppingCartPage />} />
+          <Route path="/history" element={<HistoryPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

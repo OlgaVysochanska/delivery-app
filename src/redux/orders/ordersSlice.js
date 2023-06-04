@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createOrder } from './ordersOperations';
+import { createOrder, fetchOrders } from './ordersOperations';
 
 const initialState = {
   orders: {
     shop: '',
     goods: [],
   },
+  userOrders: [],
   isLoading: false,
   error: null,
 };
@@ -44,6 +45,18 @@ const ordersSlice = createSlice({
         alert('The order was created successfully!');
       })
       .addCase(createOrder.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(fetchOrders.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchOrders.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.orders.userOrders = payload;
+      })
+      .addCase(fetchOrders.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       });

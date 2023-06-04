@@ -5,8 +5,21 @@ export const createOrder = createAsyncThunk(
   'order/addOrder',
   async (data, { rejectWithValue }) => {
     try {
-      const result = await API.addOrder( data );
-      console.log(result, "create Order")
+      const result = await API.addOrder(data);
+      return result;
+    } catch ({ response }) {
+      return rejectWithValue(response.data.message);
+    }
+  }
+);
+
+export const fetchOrders = createAsyncThunk(
+  'order/fetchOrders',
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log(data);
+      const result = await API.getOrders(data);
+      console.log(result, 'get');
       return result;
     } catch ({ response }) {
       return rejectWithValue(response.data.message);
