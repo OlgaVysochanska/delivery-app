@@ -6,8 +6,13 @@ import OrderList from 'components/OrderList/OrderList';
 import { orderedGoods } from 'redux/orders/ordersSelectors';
 import { createOrder } from 'redux/orders/ordersOperations';
 
+import styles from './ShoppingCartPage.module.css';
+
 const ShoppingCartPage = () => {
   const { goods } = useSelector(orderedGoods);
+  const { totalPrice } = useSelector(orderedGoods);
+
+  console.log(totalPrice);
 
   const dispatch = useDispatch();
 
@@ -17,7 +22,7 @@ const ShoppingCartPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.content}>
       <OrderForm onSubmit={submitForm} listOfOrders={goods} />
       <OrderList listOfOrders={goods} />
     </div>

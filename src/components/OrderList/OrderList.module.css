@@ -1,0 +1,17 @@
+.img {
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.goodTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: teal;
+  margin-bottom: 5px;
+}
+
+.list {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,29 @@
+.button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-top: 10px;
+  width: 240px;
+  border: 1px solid #c1c1c1;
+  box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
+  border-radius: 10px;
+}
+
+.img {
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.goodTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: teal;
+  margin-bottom: 5px;
+}
+
+.list {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}

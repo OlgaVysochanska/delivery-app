@@ -19,8 +19,6 @@ const ShopList = () => {
   const shops = useSelector(selectShops);
   const goods = useSelector(selectGoods);
 
-  console.log(goods);
-
   const shopBtns = shops.map(item => (
     <li key={item._id}>
       <button
@@ -28,7 +26,7 @@ const ShopList = () => {
         onClick={() => {
           dispatch(fetchGoods(item.name));
           setSelectedShop(item._id);
-          localStorage.setItem('shop', item._id);
+          localStorage.setItem('shop', item.name);
         }}
       >
         {item.name}

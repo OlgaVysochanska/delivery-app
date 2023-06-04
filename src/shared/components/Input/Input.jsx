@@ -1,3 +1,5 @@
+import styles from './Input.module.css';
+
 const Input = ({
   label,
   type,
@@ -11,7 +13,9 @@ const Input = ({
 }) => {
   return (
     <>
-      <label htmlFor={id}>{label}</label>
+      <label className={styles.label} htmlFor={id}>
+        {label}
+      </label>
       <input
         type={type}
         name={name}
@@ -20,6 +24,7 @@ const Input = ({
         title={title}
         value={value}
         onChange={handleChange}
+        className={styles.input}
       />
     </>
   );

@@ -1,6 +1,8 @@
 import useForm from 'shared/hooks/useForm';
 import initialState from './initialState';
-import Input from 'shared/components/Input';
+import Input from 'shared/components/Input/Input';
+
+import styles from './OrderForm.module.css';
 
 const OrderForm = ({ onSubmit, listOfOrders }) => {
   const { state, handleChange, handleSubmit } = useForm({
@@ -8,9 +10,15 @@ const OrderForm = ({ onSubmit, listOfOrders }) => {
     onSubmit,
   });
   const { name, email, phone, address } = state;
+
+  const currentShop = localStorage.getItem('shop');
+
   return (
     <form
-      onSubmit={e => handleSubmit(listOfOrders, name, email, phone, address)}
+      className={styles.form}
+      onSubmit={e =>
+        handleSubmit(email, name, phone, address, currentShop, listOfOrders)
+      }
     >
       <Input
         id="name"
@@ -48,7 +56,7 @@ const OrderForm = ({ onSubmit, listOfOrders }) => {
         type="text"
         handleChange={handleChange}
       />
-      <button>SUBMIT</button>
+      <button className={styles.button}>SUBMIT YOUR ORDER</button>
     </form>
   );
 };
