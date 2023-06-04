@@ -4,7 +4,7 @@ import Input from 'shared/components/Input/Input';
 
 import styles from './OrderForm.module.css';
 
-const OrderForm = ({ onSubmit, listOfOrders }) => {
+const OrderForm = ({ onSubmit, listOfOrders, total }) => {
   const { state, handleChange, handleSubmit } = useForm({
     initialState,
     onSubmit,
@@ -17,7 +17,15 @@ const OrderForm = ({ onSubmit, listOfOrders }) => {
     <form
       className={styles.form}
       onSubmit={e =>
-        handleSubmit(email, name, phone, address, currentShop, listOfOrders)
+        handleSubmit(
+          email,
+          name,
+          phone,
+          address,
+          currentShop,
+          listOfOrders,
+          total
+        )
       }
     >
       <Input

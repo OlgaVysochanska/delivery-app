@@ -48,7 +48,7 @@ const OrderList = ({ listOfOrders: goods }) => {
             step="1"
             onChange={e => handleChange(e, item._id)}
           />
-          <p>
+          <p className={styles.totalPrice}>
             Price for {item.quantity} products:{' '}
             {item.quantity ? item.price * item.quantity : item.price}
           </p>
