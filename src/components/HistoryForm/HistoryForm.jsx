@@ -1,6 +1,8 @@
 import useForm from 'shared/hooks/useForm';
 import Input from 'shared/components/Input/Input';
 
+import styles from './HistoryForm.module.css';
+
 const HistoryForm = ({ onSubmit }) => {
   const initialState = {
     email: '',
@@ -13,7 +15,7 @@ const HistoryForm = ({ onSubmit }) => {
 
   const { email } = state;
   return (
-    <form onSubmit={e => handleSubmit(e, state)}>
+    <form onSubmit={handleSubmit}>
       <Input
         id="email"
         label="Your email"
@@ -23,6 +25,7 @@ const HistoryForm = ({ onSubmit }) => {
         type="email"
         handleChange={e => handleChange(e)}
       />
+      <button className={styles.button}>Find your orders</button>
     </form>
   );
 };

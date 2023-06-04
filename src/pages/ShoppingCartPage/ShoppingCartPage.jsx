@@ -12,7 +12,7 @@ const ShoppingCartPage = () => {
   const { goods } = useSelector(orderedGoods);
   const { totalPrice } = useSelector(orderedGoods);
 
-  console.log(totalPrice);
+  // const arrayOfId = goods.map(item => item._id);
 
   const dispatch = useDispatch();
 

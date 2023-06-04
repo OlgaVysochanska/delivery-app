@@ -5,13 +5,14 @@ import Input from 'shared/components/Input/Input';
 import styles from './OrderForm.module.css';
 
 const OrderForm = ({ onSubmit, listOfOrders, total }) => {
-  const { state, handleChange } = useForm({
+  const { state, setState, handleChange } = useForm({
     initialState,
   });
 
   const handleSubmit = (e, data) => {
     e.preventDefault();
     onSubmit(data);
+    setState({ ...initialState });
   };
 
   const currentShop = localStorage.getItem('shop');
@@ -24,8 +25,8 @@ const OrderForm = ({ onSubmit, listOfOrders, total }) => {
         handleSubmit(e, {
           ...state,
           owner: email,
-          currentShop,
-          listOfOrders,
+          shop: currentShop,
+          goods: listOfOrders,
           totalPrice: total,
         });
       }}

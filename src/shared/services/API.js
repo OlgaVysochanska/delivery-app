@@ -22,14 +22,14 @@ export const getGoods = async (shop = '', page = 1) => {
   return data;
 };
 
-export const addOrder = async (orderData) => {
-  console.log(orderData, 'service order data');
+export const addOrder = async orderData => {
   const { data } = await instance.post(`/orders`, orderData);
-  console.log(data, 'service data');
   return data;
 };
 
-export const getOrders = async (email = '') => {
-  const { data } = await instance.get(`/orders`, email);
+export const getOrders = async userData => {
+  console.log(userData);
+  const { data } = await instance.get(`/orders`, userData);
+  console.log(data);
   return data;
 };

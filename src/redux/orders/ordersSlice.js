@@ -33,6 +33,12 @@ const ordersSlice = createSlice({
     setTotalPrice(state, { payload }) {
       state.orders.totalPrice = payload;
     },
+    removeItem(state, { payload }) {
+      state.orders.goods = state.orders.goods.filter(
+        item => item._id !== payload._id
+      );
+      localStorage.setItem('goods', JSON.stringify(state.orders.goods));
+    },
   },
   extraReducers: builder => {
     builder
@@ -63,6 +69,6 @@ const ordersSlice = createSlice({
   },
 });
 
-export const { setShop, setGoods, setQuantity, setTotalPrice } =
+export const { setShop, setGoods, setQuantity, setTotalPrice, removeItem } =
   ordersSlice.actions;
 export default ordersSlice.reducer;
