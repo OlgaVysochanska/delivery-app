@@ -1,6 +1,7 @@
 const Input = ({
   label,
   type,
+  name,
   id,
   placeholder,
   title,
@@ -10,10 +11,10 @@ const Input = ({
 }) => {
   return (
     <>
-      <label htmlFor={type}>{label}</label>
+      <label htmlFor={id}>{label}</label>
       <input
         type={type}
-        name={type}
+        name={name}
         id={id}
         placeholder={placeholder}
         title={title}
