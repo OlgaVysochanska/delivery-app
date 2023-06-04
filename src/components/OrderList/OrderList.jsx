@@ -1,10 +1,8 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { orderedGoods } from 'redux/orders/ordersSelectors';
 import { setQuantity } from 'redux/orders/ordersSlice';
 
-const OrderList = () => {
-  const { goods } = useSelector(orderedGoods);
+const OrderList = ({ listOfOrders: goods }) => {
   console.log(goods);
   const dispatch = useDispatch();
 
@@ -30,8 +28,7 @@ const OrderList = () => {
             onChange={e => handleChange(e, item._id)}
           />
           <p>
-            {`Price for ${item.quantity} products:{' '}
-            ${Number(item.price) * Number(item.quantity)}`}
+            Price for {item.quantity} products: {item.price * item.quantity}
           </p>
         </label>
       </div>

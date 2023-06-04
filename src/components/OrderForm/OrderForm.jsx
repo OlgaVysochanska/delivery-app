@@ -2,14 +2,16 @@ import useForm from 'shared/hooks/useForm';
 import initialState from './initialState';
 import Input from 'shared/components/Input';
 
-const OrderForm = ({ onSubmit }) => {
+const OrderForm = ({ onSubmit, listOfOrders }) => {
   const { state, handleChange, handleSubmit } = useForm({
     initialState,
     onSubmit,
   });
   const { name, email, phone, address } = state;
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={e => handleSubmit(listOfOrders, name, email, phone, address)}
+    >
       <Input
         id="name"
         label="Your name"
@@ -46,6 +48,7 @@ const OrderForm = ({ onSubmit }) => {
         type="text"
         handleChange={handleChange}
       />
+      <button>SUBMIT</button>
     </form>
   );
 };

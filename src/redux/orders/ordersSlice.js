@@ -23,7 +23,7 @@ const ordersSlice = createSlice({
       localStorage.setItem('goods', JSON.stringify(state.orders.goods));
     },
     setQuantity(state, { payload }) {
-      state.orders.products = state.orders.products.map(item =>
+      state.orders.goods = state.orders.goods.map(item =>
         item._id === payload._id
           ? { ...item, quantity: payload.quantity }
           : item
