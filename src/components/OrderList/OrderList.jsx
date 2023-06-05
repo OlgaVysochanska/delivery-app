@@ -9,6 +9,15 @@ import styles from './OrderList.module.css';
 const OrderList = () => {
   const [goodsList, setGoodsList] = useState([]);
 
+  // COMPONENT NEED REFACTORING    !!!!!!!!!!!!!!!
+  //
+  //
+  //
+  //
+  //
+  //
+  // !!!!!!!!!!!!!
+
   const { goods } = useSelector(orderedGoods);
   console.log(goods);
   useEffect(() => {
