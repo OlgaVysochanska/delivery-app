@@ -27,10 +27,8 @@ export const addOrder = async orderData => {
 };
 
 export const getOrders = async ({ email }) => {
-  console.log(email);
   const { data } = await instance.get('/orders', {
     params: { email },
   });
-  console.log(data);
   return data;
 };

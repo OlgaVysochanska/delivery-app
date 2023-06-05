@@ -29,37 +29,35 @@ const OrderList = ({ listOfOrders: goods }) => {
     dispatch(setTotalPrice(0));
   }, [dispatch, goods]);
 
-  const listOfOrders = goods.map(item => {
-    console.log(item.quantity);
-    return (
-      <li key={item._id}>
-        <div>
-          <img className={styles.img} src={item.url} alt="Food" width="300" />
-          <p className={styles.goodTitle}>{item.title}</p>
-          <p>Price: {item.price}</p>
-          <label>
-            Quantity:{' '}
-            <input
-              className={styles.input}
-              type="number"
-              name="quantity"
-              min="1"
-              max="50"
-              value={item.quantity}
-              step="1"
-              onChange={e => handleChange(e, item._id)}
-            />
-            <p className={styles.totalPrice}>
-              Price for {item.quantity} products:{' '}
-              {item.quantity
-                ? Number(item.price) * Number(item.quantity)
-                : item.price}
-            </p>
-          </label>
-        </div>
-      </li>
-    );
-  });
+  const listOfOrders = goods.map(item => (
+    <li key={item._id}>
+      <div>
+        <img className={styles.img} src={item.url} alt="Food" width="300" />
+        <p className={styles.goodTitle}>{item.title}</p>
+        <p>Price: {item.price}</p>
+        <label>
+          Quantity:{' '}
+          <input
+            className={styles.input}
+            type="number"
+            name="quantity"
+            min="1"
+            max="50"
+            onChange={e => handleChange(e, item._id)}
+            value={item.quantity}
+            step="1"
+          />
+          <p className={styles.totalPrice}>
+            Price for {item.quantity} products:{' '}
+            {item.quantity
+              ? Number(item.price) * Number(item.quantity)
+              : item.price}
+          </p>
+        </label>
+      </div>
+    </li>
+  ));
+
   return <ul className={styles.list}>{listOfOrders}</ul>;
 };
 

@@ -15,7 +15,7 @@ const HistoryForm = ({ onSubmit }) => {
 
   const { email } = state;
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <Input
         id="email"
         label="Your email"

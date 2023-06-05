@@ -23,19 +23,20 @@ const ordersSlice = createSlice({
       state.orders.goods.push(payload);
       localStorage.setItem('orders', JSON.stringify(state.orders.goods));
     },
-    setQuantity(state, { payload: { quantity, _id } }) {
-      // const changed = state.orders.goods.find(it => it._id === payload._id);
-      // const changedIdx = state.orders.goods.findIndex(
-      //   it => it._id === payload._id
-      // );
-      // state.orders.goods[changedIdx] = {
-      //   ...changed,
-      //   quantity: payload.quantity,
-      // };
-      console.log(quantity, _id);
+    setQuantity(state, { payload }) {
+      console.log(payload.quantity, payload._id);
       console.log(current(state.orders.goods));
-      state.orders.goods = state.orders.goods.map(item =>
-        item._id === _id ? { ...item, quantity } : item
+      state.orders.goods = state.orders.goods.map(
+        item => {
+          if (item._id === payload._id) {
+            console.log(current(item));
+            return (item = { ...item, quantity: payload.quantity });
+          }
+          return item;
+        }
+        // item._id === payload._id
+        //   ? { ...item, quantity: payload.quantity }
+        //   : item
       );
     },
     setTotalPrice(state, { payload }) {
@@ -68,8 +69,7 @@ const ordersSlice = createSlice({
       })
       .addCase(fetchOrders.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        console.log(payload);
-        state.orders.userOrders = payload;
+        state.userOrders = payload;
       })
       .addCase(fetchOrders.rejected, (state, { payload }) => {
         state.isLoading = false;

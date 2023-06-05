@@ -3,7 +3,8 @@ import HistoryForm from 'components/HistoryForm/HistoryForm';
 
 import { fetchOrders } from 'redux/orders/ordersOperations';
 import { userOrders } from 'redux/orders/ordersSelectors';
-import { useEffect } from 'react';
+
+import styles from './HistoryPage.module.css';
 
 const HistoryPage = () => {
   const dispatch = useDispatch();
@@ -13,14 +14,42 @@ const HistoryPage = () => {
 
   const history = useSelector(userOrders);
 
-  useEffect(() => {
-    console.log(history);
-  }, [history]);
+  const historyEntries = history.map(item => (
+    <li className={styles.oneOrder} key={item._id}>
+      <p>
+        Shop:{''} {item.shop}
+      </p>
+      <ul>
+        {item.goods.map(one => (
+          <li className={styles.oneProduct} key={one._id}>
+            <p>{one.title}</p>
+            <p>
+              Price:{''}
+              {one.price}{' '}
+            </p>
+            <p>
+              Quantity:{''}
+              {one.quantity}{' '}
+            </p>
+          </li>
+        ))}
+      </ul>
 
-  console.log(history);
+      <p>
+        Ordered at:{''}
+        {item.updatedAt}{' '}
+      </p>
+      <p>
+        Total price:{''}
+        {item.totalPrice}
+      </p>
+    </li>
+  ));
+
   return (
     <>
       <HistoryForm onSubmit={submitHistory} />
+      <ul>{historyEntries}</ul>
     </>
   );
 };
