@@ -48,11 +48,13 @@ const GoodsList = () => {
           <button
             className={styles.button}
             onClick={() => {
-              if (JSON.parse(localFood).find(ord => ord.shop !== item.shop)) {
-                alert(
-                  'You can order products only from one shop. You already have items from another shop in your cart!'
-                );
-                return;
+              if (localFood) {
+                if (JSON.parse(localFood).find(ord => ord.shop !== item.shop)) {
+                  alert(
+                    'You can order products only from one shop. You already have items from another shop in your cart!'
+                  );
+                  return;
+                }
               }
               return addToCart(item);
             }}
