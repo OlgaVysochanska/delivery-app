@@ -14,7 +14,7 @@ const GoodsList = () => {
 
   useEffect(() => {
     if (localFood !== null && localFood.length !== 0) {
-      const selected = JSON.parse(localStorage.getItem('orders'));
+      const selected = JSON.parse(localFood);
       setSelectedFood([...selected.map(item => item._id)]);
     }
   }, [localFood]);
@@ -48,11 +48,7 @@ const GoodsList = () => {
           <button
             className={styles.button}
             onClick={() => {
-              if (
-                JSON.parse(localStorage.getItem('orders')).find(
-                  ord => ord.shop !== item.shop
-                )
-              ) {
+              if (JSON.parse(localFood).find(ord => ord.shop !== item.shop)) {
                 alert(
                   'You can order products only from one shop. You already have items from another shop in your cart!'
                 );
