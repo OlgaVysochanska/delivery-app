@@ -11,6 +11,7 @@ const GoodsList = () => {
   const goods = useSelector(selectGoods);
   const dispatch = useDispatch();
   const localFood = localStorage.getItem('orders');
+
   useEffect(() => {
     if (localFood !== null && localFood.length !== 0) {
       const selected = JSON.parse(localStorage.getItem('orders'));
@@ -44,7 +45,22 @@ const GoodsList = () => {
             Remove from cart
           </button>
         ) : (
-          <button className={styles.button} onClick={() => addToCart(item)}>
+          <button
+            className={styles.button}
+            onClick={() => {
+              if (
+                JSON.parse(localStorage.getItem('orders')).find(
+                  ord => ord.shop !== item.shop
+                )
+              ) {
+                alert(
+                  'You can order products only from one shop. You already have items from another shop in your cart!'
+                );
+                return;
+              }
+              return addToCart(item);
+            }}
+          >
             Add to cart
           </button>
         )}
