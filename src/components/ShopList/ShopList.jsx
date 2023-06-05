@@ -23,7 +23,7 @@ const ShopList = () => {
   const shopBtns = shops.map(item => (
     <li key={item._id}>
       <button
-        className={styles.button}
+        className={styles.buttonShop}
         onClick={() => {
           dispatch(fetchGoods(item.name));
           setSelectedShop(item._id);
