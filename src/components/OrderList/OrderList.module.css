@@ -3,6 +3,11 @@
   margin-bottom: 10px;
 }
 
+.desc {
+  display: flex;
+  justify-content: space-between;
+}
+
 .goodTitle {
   font-size: 20px;
   font-weight: bold;
@@ -24,4 +29,17 @@
 .totalPrice {
   font-weight: bold;
   margin-top: 10px;
+}
+
+.delete {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background-color: tomato;
+  border-radius: 10px;
+  color: #fff;
+  border: none;
 }

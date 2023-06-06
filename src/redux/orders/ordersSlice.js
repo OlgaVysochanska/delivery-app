@@ -26,18 +26,13 @@ const ordersSlice = createSlice({
     setQuantity(state, { payload }) {
       console.log(payload.quantity, payload._id);
       console.log(current(state.orders.goods));
-      state.orders.goods = state.orders.goods.map(
-        item => {
-          if (item._id === payload._id) {
-            console.log(current(item));
-            return (item = { ...item, quantity: payload.quantity });
-          }
-          return item;
+      state.orders.goods = state.orders.goods.map(item => {
+        if (item._id === payload._id) {
+          console.log(current(item));
+          return (item = { ...item, quantity: payload.quantity });
         }
-        // item._id === payload._id
-        //   ? { ...item, quantity: payload.quantity }
-        //   : item
-      );
+        return item;
+      });
     },
     setTotalPrice(state, { payload }) {
       state.orders.totalPrice = payload;
@@ -46,7 +41,6 @@ const ordersSlice = createSlice({
       state.orders.goods = state.orders.goods.filter(
         item => item._id !== payload._id
       );
-      localStorage.setItem('orders', JSON.stringify(state.orders.goods));
     },
   },
   extraReducers: builder => {
