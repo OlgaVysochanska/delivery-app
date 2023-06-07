@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { selectShops, selectIsLoadingShops } from 'redux/shops/shopsSelectors';
+import { selectShops } from 'redux/shops/shopsSelectors';
 import { fetchShops } from 'redux/shops/shopsOperations';
 import { fetchGoods } from 'redux/goods/goodsOperations';
-import { Loader } from 'components/Loader/Loader';
 
 import styles from './ShopList.module.css';
 
@@ -16,7 +15,6 @@ const ShopList = () => {
   }, [dispatch]);
 
   const shops = useSelector(selectShops);
-  const isLoading = useSelector(selectIsLoadingShops);
 
   const shopBtns = shops.map(item => (
     <li key={item._id}>
@@ -32,12 +30,7 @@ const ShopList = () => {
     </li>
   ));
 
-  return (
-    <>
-      {isLoading && <Loader />}
-      <ul>{shopBtns}</ul>
-    </>
-  );
+  return <ul>{shopBtns}</ul>;
 };
 
 export default ShopList;

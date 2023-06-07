@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { createOrder, fetchOrders } from './ordersOperations';
 
 const initialState = {
@@ -24,11 +24,8 @@ const ordersSlice = createSlice({
       localStorage.setItem('orders', JSON.stringify(state.orders.goods));
     },
     setQuantity(state, { payload }) {
-      console.log(payload.quantity, payload._id);
-      console.log(current(state.orders.goods));
       state.orders.goods = state.orders.goods.map(item => {
         if (item._id === payload._id) {
-          console.log(current(item));
           return (item = { ...item, quantity: payload.quantity });
         }
         return item;

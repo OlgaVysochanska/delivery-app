@@ -32,7 +32,6 @@ const OrderList = () => {
           goods
             .map(item => Number(item.price) * Number(item.quantity))
             .reduce((acc, item) => {
-              console.log(item);
               return acc + item;
             }, 0)
         )
