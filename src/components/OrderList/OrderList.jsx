@@ -9,6 +9,7 @@ import {
 import { orderedGoods } from 'redux/orders/ordersSelectors';
 
 import styles from './OrderList.module.css';
+import CrossIcon from '../Icons/CrossIcon';
 
 const OrderList = () => {
   const { goods } = useSelector(orderedGoods);
@@ -73,7 +74,7 @@ const OrderList = () => {
           type="button"
           className={styles.delete}
         >
-          X
+          <CrossIcon />
         </button>
       </div>
     </li>
