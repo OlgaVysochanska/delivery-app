@@ -3,8 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import OrderForm from 'components/OrderForm/OrderForm';
 import OrderList from 'components/OrderList/OrderList';
 
-import { orderedGoods } from 'redux/orders/ordersSelectors';
+import {
+  orderedGoods,
+  selectIsLoadingOrders,
+} from 'redux/orders/ordersSelectors';
 import { createOrder } from 'redux/orders/ordersOperations';
+
+import { Loader } from 'components/Loader/Loader';
 
 import styles from './ShoppingCartPage.module.css';
 
@@ -15,8 +20,7 @@ const ShoppingCartPage = () => {
   const dispatch = useDispatch();
 
   const { totalPrice } = useSelector(orderedGoods);
-
-  // const arrayOfId = goods.map(item => item._id);
+  const isLoading = useSelector(selectIsLoadingOrders);
 
   const submitForm = data => {
     dispatch(createOrder(data));
@@ -29,7 +33,7 @@ const ShoppingCartPage = () => {
         listOfOrders={goods}
         total={totalPrice}
       />
-      <OrderList listOfOrders={goods} />
+      {isLoading ? <Loader /> : <OrderList />}
     </div>
   );
 };

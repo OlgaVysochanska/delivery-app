@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setGoods, removeItem } from 'redux/orders/ordersSlice';
-import { selectGoods } from 'redux/goods/goodsSelectors';
+import { selectGoods, selectIsLoadingGoods } from 'redux/goods/goodsSelectors';
+
+import { Loader } from 'components/Loader/Loader';
 
 import styles from './GoodsList.module.css';
 
 const GoodsList = () => {
   const [selectedFood, setSelectedFood] = useState([]);
   const goods = useSelector(selectGoods);
+  const isLoading = useSelector(selectIsLoadingGoods);
   const dispatch = useDispatch();
   const localFood = localStorage.getItem('orders');
 
@@ -66,7 +69,9 @@ const GoodsList = () => {
     );
   });
 
-  return <ul className={styles.list}>{goodsList}</ul>;
+  return (
+    <>{isLoading ? <Loader /> : <ul className={styles.list}>{goodsList}</ul>}</>
+  );
 };
 
 export default GoodsList;

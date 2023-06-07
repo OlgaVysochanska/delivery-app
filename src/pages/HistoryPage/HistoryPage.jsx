@@ -2,7 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import HistoryForm from 'components/HistoryForm/HistoryForm';
 
 import { fetchOrders } from 'redux/orders/ordersOperations';
-import { userOrders } from 'redux/orders/ordersSelectors';
+import {
+  userOrders,
+  selectIsLoadingOrders,
+} from 'redux/orders/ordersSelectors';
+
+import { Loader } from 'components/Loader/Loader';
 
 import styles from './HistoryPage.module.css';
 
@@ -13,6 +18,7 @@ const HistoryPage = () => {
   };
 
   const history = useSelector(userOrders);
+  const isLoading = useSelector(selectIsLoadingOrders);
 
   const historyEntries = history.map(item => (
     <li className={styles.oneOrder} key={item._id}>
@@ -49,7 +55,7 @@ const HistoryPage = () => {
   return (
     <>
       <HistoryForm onSubmit={submitHistory} />
-      <ul>{historyEntries}</ul>
+      {isLoading ? <Loader /> : <ul>{historyEntries}</ul>}
     </>
   );
 };
