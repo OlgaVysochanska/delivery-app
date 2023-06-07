@@ -10,3 +10,8 @@
   border-bottom: 1px solid teal;
   box-shadow: 3px 8px 14px rgba(136, 198, 253, 0.19);
 }
+
+.navLink:global(.active) {
+  color: #ff6347;
+  font-weight: bold;
+}

@@ -41,6 +41,8 @@ const ordersSlice = createSlice({
       state.orders.goods = state.orders.goods.filter(
         item => item._id !== payload._id
       );
+      localStorage.removeItem('orders');
+      localStorage.setItem('orders', JSON.stringify(state.orders.goods));
     },
   },
   extraReducers: builder => {
