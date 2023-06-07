@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -11,22 +11,7 @@ import { orderedGoods } from 'redux/orders/ordersSelectors';
 import styles from './OrderList.module.css';
 
 const OrderList = () => {
-  const [goodsList, setGoodsList] = useState([]);
   const { goods } = useSelector(orderedGoods);
-  const localFood = localStorage.getItem('orders');
-
-  useEffect(() => {
-    setGoodsList(goods);
-  }, [goods]);
-
-  useEffect(() => {
-    try {
-      const orders = localFood ? JSON.parse(localFood) : [];
-      setGoodsList(orders);
-    } catch (e) {
-      console.log(e.message);
-    }
-  }, [localFood]);
 
   const dispatch = useDispatch();
 
@@ -34,21 +19,17 @@ const OrderList = () => {
     localStorage.removeItem('orders');
     dispatch(setQuantity({ quantity: Number(e.target.value), _id: data }));
     localStorage.setItem('orders', JSON.stringify(goods));
-    const orders = JSON.parse(localFood);
-    setGoodsList(orders);
   };
 
   const removeFromCart = data => {
     dispatch(removeItem(data));
-    localStorage.removeItem('orders');
-    localStorage.setItem('orders', JSON.stringify(goods));
   };
 
   useEffect(() => {
-    if (goodsList.length !== 0) {
+    if (goods.length !== 0) {
       dispatch(
         setTotalPrice(
-          goodsList
+          goods
             .map(item => Number(item.price) * Number(item.quantity))
             .reduce((acc, item) => {
               console.log(item);
@@ -59,9 +40,9 @@ const OrderList = () => {
       return;
     }
     dispatch(setTotalPrice(0));
-  }, [dispatch, goodsList]);
+  }, [dispatch, goods]);
 
-  const listOfOrders = goodsList.map(item => (
+  const listOfOrders = goods.map(item => (
     <li key={item._id}>
       <img className={styles.img} src={item.url} alt="Food" width="300" />
       <div className={styles.desc}>
@@ -98,8 +79,6 @@ const OrderList = () => {
       </div>
     </li>
   ));
-
-  console.log(goodsList, 'goodsList');
 
   return <ul className={styles.list}>{listOfOrders}</ul>;
 };
