@@ -25,6 +25,7 @@ const GoodsList = () => {
   const addToCart = data => {
     dispatch(setGoods(data));
     setSelectedFood([...selectedFood, data._id]);
+    localStorage.setItem('shop', data.shop);
   };
 
   const removeFromCart = data => {

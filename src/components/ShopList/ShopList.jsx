@@ -22,7 +22,6 @@ const ShopList = () => {
         className={styles.buttonShop}
         onClick={() => {
           dispatch(fetchGoods(item.name));
-          localStorage.setItem('shop', item.name);
         }}
       >
         {item.name}

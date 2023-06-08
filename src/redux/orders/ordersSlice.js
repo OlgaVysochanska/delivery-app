@@ -15,10 +15,6 @@ const ordersSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {
-    setShop(state, { payload }) {
-      state.orders.shop = payload;
-      localStorage.setItem('shopName', payload);
-    },
     setGoods(state, { payload }) {
       state.orders.goods.push(payload);
       localStorage.setItem('orders', JSON.stringify(state.orders.goods));
@@ -71,6 +67,6 @@ const ordersSlice = createSlice({
   },
 });
 
-export const { setShop, setGoods, setQuantity, setTotalPrice, removeItem } =
+export const { setGoods, setQuantity, setTotalPrice, removeItem } =
   ordersSlice.actions;
 export default ordersSlice.reducer;
