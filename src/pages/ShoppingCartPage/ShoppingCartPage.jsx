@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
+import { LoadScript } from '@react-google-maps/api';
+
 import OrderForm from 'components/OrderForm/OrderForm';
 import OrderList from 'components/OrderList/OrderList';
 
@@ -26,15 +28,20 @@ const ShoppingCartPage = () => {
     dispatch(createOrder(data));
   };
 
+  const mapKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+  const libraries = ['places'];
+
   return (
-    <div className={styles.content}>
-      <OrderForm
-        onSubmit={submitForm}
-        listOfOrders={goods}
-        total={totalPrice}
-      />
-      {isLoading ? <Loader /> : <OrderList />}
-    </div>
+    <LoadScript googleMapsApiKey={mapKey} libraries={libraries}>
+      <div className={styles.content}>
+        <OrderForm
+          onSubmit={submitForm}
+          listOfOrders={goods}
+          total={totalPrice}
+        />
+        {isLoading ? <Loader /> : <OrderList />}
+      </div>
+    </LoadScript>
   );
 };
 
